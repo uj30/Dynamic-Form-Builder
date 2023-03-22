@@ -1,0 +1,18 @@
+<div *ngFor="let qa of question; let i = index">
+  <div class="question-style space-between">{{ qa.question }}</div>
+  <div *ngIf="qa.answerType == 'paragraph'" class="space-between answer-style">
+    {{ answer["Ques" + i] }}
+  </div>
+  <div *ngIf="qa.answerType == 'checkbox'">
+    <div *ngFor="let ansList of qa.answerList; let j = index">
+      <div *ngIf="answer['Ques' + i][j]" class="space-between answer-style">
+        {{ ansList.value }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="space-between">
+  <button mat-raised-button (click)="backToFormBuilder()">
+    Back to Form Builder
+  </button>
+</div>

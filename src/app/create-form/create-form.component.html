@@ -1,0 +1,48 @@
+<div [formGroup]="dynamicForm">
+  <div
+    *ngFor="let question of listOfQuestion; let i = index"
+    class="space-between"
+  >
+    <label class="question-style">{{ question.question }}*</label>
+
+    <div [ngSwitch]="question.answerType" class="space-between">
+      <input
+        *ngSwitchCase="'paragraph'"
+        type="text"
+        [formControlName]="'Ques' + i"
+        class="paragraph-answer-style"
+      />
+      <div *ngSwitchCase="'checkbox'">
+        <div
+          *ngFor="let checkboxAns of question.answerList; let j = index"
+          [formArrayName]="'Ques' + i"
+        >
+          <input
+            type="checkbox"
+            class="space-between"
+            [id]="checkboxAns.value"
+            [name]="checkboxAns.value"
+            [formControlName]="j"
+          />
+          <label [for]="checkboxAns.value" class="checkbox-text-style">{{
+            checkboxAns.value
+          }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="space-between">
+  <button mat-raised-button (click)="openAddQuestionModal()">
+    Add Question
+  </button>
+</div>
+<div class="space-between" *ngIf="listOfQuestion.length">
+  <button
+    mat-raised-button
+    (click)="reviewMyAnswer()"
+    [disabled]="dynamicForm.invalid"
+  >
+    Review My Answer
+  </button>
+</div>

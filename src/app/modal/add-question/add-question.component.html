@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Add a Question</h1>
+<div mat-dialog-content class="mat-dialog-content-style">
+  <div>
+    <input
+      matInput
+      placeholder="Type question here"
+      [(ngModel)]="question"
+      class="text-box-style"
+    />
+  </div>
+  <div class="space-between">
+    <mat-radio-group [(ngModel)]="answerType">
+      <mat-radio-button value="paragraph">Paragraph</mat-radio-button>
+      <mat-radio-button value="checkbox" class="checkbox-space-left"
+        >Checkbox</mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+  <div *ngIf="answerType == 'checkbox'">
+    <div *ngFor="let ans of answerArray" class="space-between">
+      <input
+        matInput
+        placeholder="Type answer here"
+        [(ngModel)]="ans.value"
+        class="text-box-style"
+      />
+    </div>
+    <div class="space-between">
+      <button mat-button (click)="addAnotherAnswer()">
+        Add Another Answer
+      </button>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="submit()">Submit</button>
+</div>
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
